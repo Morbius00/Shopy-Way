@@ -6,7 +6,7 @@ const PinkButton = ({ children, className, onClick, disabled, to }) => {
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`rounded-2xl font-medium text-xl px-[2vw] py-[1vh] hover:bg-[#494848] bg-[#333333] text-white ${className}`}
+      className={`rounded-xl font-medium text-xl px-[2vw] py-[1vh] hover:bg-[#494848] bg-[#333333] text-white ${className}`}
     >
       {children}
     </button>
