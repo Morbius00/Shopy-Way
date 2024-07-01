@@ -59,7 +59,7 @@ export default function Landing() {
           </div>
         </div>
       </div>
-      <div className="md:text-4xl text-2xl text-center font-semibold md:my-12 my-5">
+      <div className="md:text-4xl text-2xl text-center font-semibold md:mt-32  my-5">
         Our Trusted Brands
       </div>
       <div className="flex md:flex-row flex-col items-center justify-center mx-10  my-10">
