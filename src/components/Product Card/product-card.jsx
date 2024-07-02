@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaShoppingCart, FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
-import "./productcard.css"; 
+import "./productcard.css";
+import SizeCheck from "./sizebox";
 
 const api = "https://fakestoreapi.com/products";
 const limitCount = 12;
@@ -12,7 +13,7 @@ function ProductCard() {
   const [error, setError] = useState(null);
   const [limit, setLimit] = useState(limitCount);
   const [page, setPage] = useState(initialPage);
-  const [, setTotal] = useState(initialTotal);
+  const [total, setTotal] = useState(initialTotal);
   const [loaded, setLoaded] = useState(false);
 
   const handleBuyClick = (id) => {
@@ -34,9 +35,11 @@ function ProductCard() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${api}?limit=${limit}&skip=${page * limit}`);
+        const response = await fetch(
+          `${api}?limit=${limit}&skip=${page * limit}`
+        );
         const data = await response.json();
-        setProducts(data.map(product => ({ ...product, clicked: false })));
+        setProducts(data.map((product) => ({ ...product, clicked: false })));
         setTotal(data.length);
         setLoaded(true);
       } catch (err) {
@@ -54,60 +57,77 @@ function ProductCard() {
   }, [limit, page, loaded]);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="text-center text-2xl font-bold text-[#6A6666]">Error: {error}</div>;
   }
 
   if (!loaded) {
-    return <div>Loading...</div>;
+    return <div className="text-center text-2xl font-bold text-[#6A6666]">Loading...</div>;
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {products.map((product) => (
-        <div key={product.id} className="wrapper">
-          <div className="container">
-            <div className="top flex items-center justify-center border border-gray-400">
-              <img src={product.image} alt={product.title} className="product-image w-64 h-72" />
-            </div>
-            <div className={`bottom ${product.clicked ? "clicked" : ""}`}>
-              <div className="left">
-                <div className="details text-md text-center text-black font-bold">
-                  <h1>{product.title}</h1>
-                  <p>£{product.price}</p>
+    <div className="flex flex-row items-center justify-center">
+      <div className="grid  sm:grid-cols-2 lg:grid-cols-3 gap-20">
+        {products.map((product) => (
+          <div key={product.id} className="wrapper">
+            <div className="container">
+              <div className="top flex items-center justify-center">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="product-image w-64 h-72 rounded-lg shadow-lg shadow-gray-500"
+                />
+              </div>
+              <div className="flex flex-row items-center justify-center gap-6 -mt-2 mb-2">
+                <div className=" text-xl ml-4 mb-1 font-semibold text-white">
+                  <p>Price:  <span className="text-green-700">${product.price}</span></p>
                 </div>
-                <div
-                  className="buy flex items-center justify-center"
-                  onClick={() => handleBuyClick(product.id)}
-                >
-                  <FaShoppingCart size={24} />
+                <div>
+                  <SizeCheck />
                 </div>
               </div>
-              <div className="right">
-                <div className="done flex items-center justify-center">
-                  <FaCheck size={24} />
+
+              <div className={`bottom ${product.clicked ? "clicked" : ""}`}>
+                <div className="left flex items-center justify-center space-x-3">
+                  <div className="details text-md text-center text-black font-bold">
+                    <h1>{product.title}</h1>
+                  </div>
+                  <div
+                    className="buy flex items-center justify-center"
+                    onClick={() => handleBuyClick(product.id)}
+                  >
+                    <FaShoppingCart size={24} />
+                  </div>
                 </div>
-                <div className="details text-xl flex items-center justify-center">
-                  <p>Added to your cart</p>
-                </div>
-                <div
-                  className="remove flex items-center justify-center"
-                  onClick={() => handleRemoveClick(product.id)}
-                >
-                  <FaTimes size={24} />
+                <div className="right">
+                  <div className="done flex items-center justify-center">
+                    <FaCheck size={24} />
+                  </div>
+                  <div className="details text-xl flex items-center justify-center mt-3">
+                    <p>Added to your cart</p>
+                  </div>
+                  <div
+                    className="remove flex items-center justify-center"
+                    onClick={() => handleRemoveClick(product.id)}
+                  >
+                    <FaTimes size={24} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="inside">
-              <div className="icon">
-                <FaInfoCircle size={24} />
-              </div>
-              <div className="contents text-center text-white">
-                {product.description}
+              <div className="inside">
+                <div className="icon">
+                  <FaInfoCircle size={24} />
+                </div>
+                <div className="contents text-center text-white text-sm">
+                  <div className="text-white text-xl font-bold my-5">
+                    Product Details
+                  </div>
+                  {product.description}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
