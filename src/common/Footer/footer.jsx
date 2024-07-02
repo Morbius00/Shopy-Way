@@ -10,7 +10,7 @@ export default function footer() {
               <div>
                 <img className="mb-5" src={FootLogo} alt="brand logo" />
               </div>
-              <h1 className="max-w-lg text-xl font-medium tracking-tight text-gray-800 xl:text-2xl dark:text-gray-300">
+              <h1 className="max-w-lg text-lg font-medium tracking-tight text-gray-800 xl:text-xl dark:text-gray-300">
                 Subscribe our newsletter to get an update on Daily offers.
               </h1>
 
