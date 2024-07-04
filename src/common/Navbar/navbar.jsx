@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
+import { FaShoppingCart } from "react-icons/fa";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLogo } from "./Nav-Assets";
 import { Link } from "react-router-dom";
@@ -49,7 +50,7 @@ export default function Navbar() {
               <div className="flex md:flex-none flex-1 items-center justify-center ">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="h-8 md:h-10 w-auto"
+                    className="h-8 md:h-10 w-auto mr-16 sm:mr-0"
                     src={NavLogo}
                     alt="Your Company"
                   />
@@ -75,6 +76,23 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+                {/* Cart button */}
+                <div className="flex items-center justify-center relative md:w-[51px] md:h-[51px] w-8 h-8 p-2 mr-2  rounded-full bg-gray-800 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  {cartButtonNavigation.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.to}
+                      className="btn flex flex-row"
+                    >
+                      <FaShoppingCart size={24} />
+                      <span className="absolute -top-2  -right-2  md:w-6 md:h-6  w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-sm font-bold text-white">
+                        {cart.length}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+                 {/* Notification button  */}
                 <button
                   type="button"
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -146,13 +164,6 @@ export default function Navbar() {
                   </MenuItems>
                 </Menu>
               </div>
-              <div className="navbar-end">
-                {cartButtonNavigation.map((item) => (
-                  <Link key={item.name} to={item.to} className="btn">
-                    Cart({cart.length})
-                  </Link>
-                ))}
-              </div>
             </div>
           </div>
 
@@ -166,7 +177,7 @@ export default function Navbar() {
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      : "text-black hover:bg-gray-700 hover:text-white",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}

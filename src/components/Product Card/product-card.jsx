@@ -68,7 +68,7 @@ function ProductCard({ limit, page }) {
 
   return (
     <div className="flex flex-row items-center justify-center ">
-      <div className="grid  sm:grid-cols-2 lg:grid-cols-3 gap-20">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 gap-7 mx-1">
         {products.map((product) => (
           <div key={product.id} className="wrapper">
             <div className="container">
