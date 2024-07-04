@@ -1,20 +1,19 @@
+// product-card.jsx
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { FaShoppingCart, FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import "./productcard.css";
 import SizeCheck from "./sizebox";
+import { useContext } from 'react';
+import { CartContext } from '../../services/CartContext';
 
 const api = "https://fakestoreapi.com/products";
-const limitCount = 12;
-const initialPage = 0;
-const initialTotal = 0;
 
-function ProductCard() {
+function ProductCard({ limit, page }) {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [limit, setLimit] = useState(limitCount);
-  const [page, setPage] = useState(initialPage);
-  const [total, setTotal] = useState(initialTotal);
   const [loaded, setLoaded] = useState(false);
+  const { addToCart, removeFromCart } = useContext(CartContext);
 
   const handleBuyClick = (id) => {
     setProducts((prevProducts) =>
@@ -35,37 +34,40 @@ function ProductCard() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(
-          `${api}?limit=${limit}&skip=${page * limit}`
-        );
+        setLoaded(false); // Set loading state
+        const response = await fetch(`${api}?limit=${limit}&skip=${(page - 1) * limit}`);
         const data = await response.json();
         setProducts(data.map((product) => ({ ...product, clicked: false })));
-        setTotal(data.length);
         setLoaded(true);
       } catch (err) {
         setError(err.message);
         setProducts([]);
-        setTotal(0);
-        setLimit(0);
-        setPage(0);
+        setLoaded(true); // Set loaded state even if there's an error
       }
     };
 
-    if (!loaded) {
-      fetchProducts();
-    }
-  }, [limit, page, loaded]);
+    fetchProducts();
+  }, [limit, page,]);
 
+  
   if (error) {
-    return <div className="text-center text-2xl font-bold text-[#6A6666]">Error: {error}</div>;
+    return (
+      <div className="text-center text-2xl font-bold text-[#6A6666]">
+        Error: {error}
+      </div>
+    );
   }
 
   if (!loaded) {
-    return <div className="text-center text-2xl font-bold text-[#6A6666]">Loading...</div>;
+    return (
+      <div className="text-center text-2xl font-bold text-[#6A6666]">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-row items-center justify-center">
+    <div className="flex flex-row items-center justify-center ">
       <div className="grid  sm:grid-cols-2 lg:grid-cols-3 gap-20">
         {products.map((product) => (
           <div key={product.id} className="wrapper">
@@ -74,12 +76,15 @@ function ProductCard() {
                 <img
                   src={product.image}
                   alt={product.title}
-                  className="product-image w-64 h-72 rounded-lg shadow-lg shadow-gray-500"
+                  className="product-image w-72 h-80 rounded-lg shadow-lg shadow-gray-500"
                 />
               </div>
               <div className="flex flex-row items-center justify-center gap-6 -mt-2 mb-2">
                 <div className=" text-xl ml-4 mb-1 font-semibold text-white">
-                  <p>Price:  <span className="text-green-700">${product.price}</span></p>
+                  <p>
+                    Price:{" "}
+                    <span className="text-green-700">${product.price}</span>
+                  </p>
                 </div>
                 <div>
                   <SizeCheck />
@@ -93,7 +98,8 @@ function ProductCard() {
                   </div>
                   <div
                     className="buy flex items-center justify-center"
-                    onClick={() => handleBuyClick(product.id)}
+                    onClick={() => [handleBuyClick(product.id), addToCart(product)]}
+                   
                   >
                     <FaShoppingCart size={24} />
                   </div>
@@ -107,7 +113,8 @@ function ProductCard() {
                   </div>
                   <div
                     className="remove flex items-center justify-center"
-                    onClick={() => handleRemoveClick(product.id)}
+                    onClick={() => [handleRemoveClick(product.id), removeFromCart(product.id)]}
+                    
                   >
                     <FaTimes size={24} />
                   </div>
@@ -131,5 +138,10 @@ function ProductCard() {
     </div>
   );
 }
+
+ProductCard.propTypes = {
+  limit: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+};
 
 export default ProductCard;

@@ -1,8 +1,17 @@
-
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLogo } from "./Nav-Assets";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../services/CartContext";
+import { useContext } from "react";
 
 const navigation = [
   { name: "Dashboard", to: "/", current: true },
@@ -11,12 +20,14 @@ const navigation = [
   { name: "About Us", to: "/about", current: false },
   { name: "Contact", to: "/contact", current: false },
 ];
+const cartButtonNavigation = [{ name: "Cart", to: "/cart", current: false }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const { cart } = useContext(CartContext);
   return (
     <Disclosure as="nav" className="bg-transparent my-3">
       {({ open }) => (
@@ -37,7 +48,11 @@ export default function Navbar() {
               </div>
               <div className="flex md:flex-none flex-1 items-center justify-center ">
                 <div className="flex flex-shrink-0 items-center">
-                  <img className="h-8 md:h-10 w-auto" src={NavLogo} alt="Your Company" />
+                  <img
+                    className="h-8 md:h-10 w-auto"
+                    src={NavLogo}
+                    alt="Your Company"
+                  />
                 </div>
               </div>
               <div className="items-center justify-center hidden sm:ml-6 md:block ">
@@ -47,7 +62,9 @@ export default function Navbar() {
                       key={item.name}
                       to={item.to}
                       className={classNames(
-                        item.current ? "bg-gray-900 text-white" : "text-gray-700 hover:bg-gray-900 hover:text-white",
+                        item.current
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-700 hover:bg-gray-900 hover:text-white",
                         "rounded-md px-3 py-2 text-base font-medium flex items-center justify-center"
                       )}
                       aria-current={item.current ? "page" : undefined}
@@ -64,7 +81,10 @@ export default function Navbar() {
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 md:h-11 w-6 md:w-11" aria-hidden="true" />
+                  <BellIcon
+                    className="h-6 md:h-11 w-6 md:w-11"
+                    aria-hidden="true"
+                  />
                 </button>
 
                 {/* Profile dropdown */}
@@ -126,6 +146,13 @@ export default function Navbar() {
                   </MenuItems>
                 </Menu>
               </div>
+              <div className="navbar-end">
+                {cartButtonNavigation.map((item) => (
+                  <Link key={item.name} to={item.to} className="btn">
+                    Cart({cart.length})
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -137,7 +164,9 @@ export default function Navbar() {
                   as={Link}
                   to={item.to}
                   className={classNames(
-                    item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}

@@ -1,9 +1,22 @@
+// store.jsx
+
+import { useState } from "react";
 import ShopBanner from "../components/Banner/ShopBanner/shop-banner";
 import ProductCard from "../components/Product Card/product-card";
 import { Model04 } from "../assets/Home assets";
-import  Button  from "../common/Buttons/button";
+import Button from "../common/Buttons/button";
+import Pagination from "../components/Product Card/Pagination";
 
-export default function store() {
+export default function Store() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 12;
+  const totalProducts = 20; // Assuming there are 50 products for example
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div>
       <ShopBanner />
@@ -12,10 +25,12 @@ export default function store() {
           Top Products For You
         </div>
         <div>
-          {/* <Prduct1/> */}
-          <div>
-            <ProductCard />
-          </div>
+          <ProductCard limit={productsPerPage} page={currentPage} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
           <div className="flex items-center justify-center sm:mt-36 mt-16 mb-80 sm:mb-24">
             <div className="flex sm:flex-row flex-col h-[307px] w-[396px] bg-[#FFCFBC] md:w-[1360px] md:h-[480px] sm:w-[720px] sm:h-[400px] xs:w-[480px] xs:h-[240px]">
               <div className="flex flex-col justify-between p-8">
