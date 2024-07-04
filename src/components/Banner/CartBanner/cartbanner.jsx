@@ -24,7 +24,7 @@ export default function cartanner() {
         </div>
         <div>
           <div className=" flex items-center justify-center">
-            <img className="w-96 sm:w-96 lg:pt-5 lg:w-[799px]  " src={CartHero} alt="Hero image fro banner" />
+            <img className="w-96 sm:w-96 lg:pt-5 lg:w-[799px]  " src={CartHero} alt="Hero image fro banner" loading="lazy"/>
           </div>
         </div>
       </div>
