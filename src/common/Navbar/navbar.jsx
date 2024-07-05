@@ -15,10 +15,10 @@ import { CartContext } from "../../services/CartContext";
 import { useContext } from "react";
 
 const navigation = [
-  { name: "Dashboard", to: "/", current: true },
+  { name: "Dashboard", to: "/", current: false },
   { name: "Store", to: "/store", current: false },
   { name: "Category", to: "/checkout", current: false },
-  { name: "About Us", to: "/about", current: false },
+  { name: "About", to: "/about", current: false },
   { name: "Contact", to: "/contact", current: false },
 ];
 const cartButtonNavigation = [{ name: "Cart", to: "/cart", current: false }];
