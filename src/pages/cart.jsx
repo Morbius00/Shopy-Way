@@ -1,4 +1,3 @@
-// cart-page.jsx
 import { useContext } from "react";
 import { CartContext } from "../services/CartContext";
 import { Link } from "react-router-dom";
@@ -7,11 +6,16 @@ import CartBanner from "../components/Banner/CartBanner/cartbanner";
 import CartOffer from "../components/Banner/CartBanner/cart-product-offer";
 import Button from "../common/Buttons/button";
 import { Emptycart } from "../assets/Shop assets";
+
 function CartPage() {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const { cart, removeFromCart, addToCheckout } = useContext(CartContext);
 
   const handleRemoveClick = (id) => {
     removeFromCart(id);
+  };
+
+  const handleBuyNowClick = (product) => {
+    addToCheckout(product);
   };
 
   return (
@@ -22,7 +26,6 @@ function CartPage() {
       <div className="md:text-4xl text-2xl text-center font-semibold my-8 md:my-10">
         Your Cart Items
       </div>
-      {/* !...Selected Product Card for cart...! */}
       <div className="flex flex-col items-center justify-center">
         {cart.length > 0 ? (
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 gap-7 mx-1">
@@ -58,12 +61,12 @@ function CartPage() {
                 </div>
                 <div className="flex items-center justify-center gap-3">
                   <div>
-                    <Button>Buy Now</Button>
+                    <Button onClick={() => handleBuyNowClick(product)}>Buy Now</Button>
                   </div>
                   <div>
                     <button
                       onClick={() => handleRemoveClick(product.id)}
-                      className="remove flex items-center justify-center gap-1 rounded-xl font-medium text-xl md:px-[1vw] px-[3vw] py-[1vh] hover:bg-red-800 bg-red-600 text-white "
+                      className="remove flex items-center justify-center gap-1 rounded-xl font-medium text-xl md:px-[1vw] px-[3vw] py-[1vh] hover:bg-red-800 bg-red-600 text-white"
                     >
                       <FaTimes size={24} />
                       Remove
@@ -81,11 +84,10 @@ function CartPage() {
             Opps your cart is empty !
           </div>
         )}
-        {/* !...Selected Product Card for cart END...! */}
         <div className="flex flex-col items-center justify-center">
           <Link
             to="/checkout"
-            className="my-5 rounded-xl font-medium text-xl sm:px-[2vw] px-[6vw] py-[1vh] hover:bg-orange-800 bg-orange-500 text-white "
+            className="my-5 rounded-xl font-medium text-xl sm:px-[2vw] px-[6vw] py-[1vh] hover:bg-orange-800 bg-orange-500 text-white"
           >
             Checkout All
           </Link>

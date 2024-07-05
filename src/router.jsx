@@ -5,6 +5,7 @@ import App from "./app/App";
 import Home from "./pages/Landing";
 import Store from "./pages/store";
 import Cart from "./pages/cart";
+import Checkout from "./pages/checkout"
 
 export const routes = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const routes = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },

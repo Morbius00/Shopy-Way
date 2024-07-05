@@ -17,7 +17,7 @@ import { useContext } from "react";
 const navigation = [
   { name: "Dashboard", to: "/", current: true },
   { name: "Store", to: "/store", current: false },
-  { name: "Category", to: "/category", current: false },
+  { name: "Category", to: "/checkout", current: false },
   { name: "About Us", to: "/about", current: false },
   { name: "Contact", to: "/contact", current: false },
 ];
