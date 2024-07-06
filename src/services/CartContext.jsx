@@ -28,8 +28,13 @@ const CartProvider = ({ children }) => {
     setCheckoutItems((prevCheckoutItems) => prevCheckoutItems.filter((product) => product.id !== productId));
   };
 
+  const checkoutAll = () => {
+    setCheckoutItems([...cart]);
+  };
+
+
   return (
-    <CartContext.Provider value={{ cart, checkoutItems, addToCart, removeFromCart, addToCheckout, removeFromCheckout }}>
+    <CartContext.Provider value={{ cart, checkoutItems, addToCart, removeFromCart, addToCheckout, removeFromCheckout, checkoutAll }}>
       {children}
     </CartContext.Provider>
   );

@@ -5,6 +5,7 @@ import Button from "../common/Buttons/button";
 import { FaTimes } from "react-icons/fa";
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
+import { BuyFirstHero } from "../assets/Shop assets";
 
 function Checkout() {
   const [pinCode, setPinCode] = useState("");
@@ -24,7 +25,9 @@ function Checkout() {
   };
 
   return (
-    <div className="container mx-auto p-4 ">
+    <div className=" flex flex-col items-center justify-center">
+      {checkoutItems.length > 0 ? (
+      <div className="container p-4 ">
       {checkoutItems.map((product) => (
         <div key={product.id} className="grid grid-cols-1 md:grid-cols-2 gap-5 border rounded-2xl border-gray-300 shadow-2xl p-10  my-10">
           <div className="flex items-center justify-center flex-col">
@@ -136,6 +139,16 @@ function Checkout() {
         </div>
       ))}
     </div>
+    ) : (
+      <div className="flex flex-col items-center justify-center sm:text-3xl text-2xl text-center font-normal my-8 md:my-10 mx-3">
+        <div>
+          <img src={BuyFirstHero} alt="empty cart image" className="w-[500px]" />
+        </div>
+        Opps you have nothing to checkout!
+      </div>
+    )}
+    </div>
+    
   );
 }
 

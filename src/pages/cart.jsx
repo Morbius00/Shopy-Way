@@ -8,7 +8,7 @@ import Button from "../common/Buttons/button";
 import { Emptycart } from "../assets/Shop assets";
 
 function CartPage() {
-  const { cart, removeFromCart, addToCheckout } = useContext(CartContext);
+  const { cart, removeFromCart, addToCheckout, checkoutAll } = useContext(CartContext);
 
   const handleRemoveClick = (id) => {
     removeFromCart(id);
@@ -16,6 +16,10 @@ function CartPage() {
 
   const handleBuyNowClick = (product) => {
     addToCheckout(product);
+  };
+
+  const handleCheckoutAllClick = () => {
+    checkoutAll();
   };
 
   return (
@@ -61,7 +65,7 @@ function CartPage() {
                 </div>
                 <div className="flex items-center justify-center gap-3">
                   <div>
-                    <Button onClick={() => handleBuyNowClick(product)}>Buy Now</Button>
+                    <Button onClick={() => handleBuyNowClick(product)} to="/checkout">Buy Now</Button>
                   </div>
                   <div>
                     <button
@@ -87,6 +91,7 @@ function CartPage() {
         <div className="flex flex-col items-center justify-center">
           <Link
             to="/checkout"
+            onClick={handleCheckoutAllClick}
             className="my-5 rounded-xl font-medium text-xl sm:px-[2vw] px-[6vw] py-[1vh] hover:bg-orange-800 bg-orange-500 text-white"
           >
             Checkout All
