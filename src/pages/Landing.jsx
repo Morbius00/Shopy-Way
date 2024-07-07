@@ -55,7 +55,7 @@ export default function Landing() {
               what you are, what you want to express by the way you dress and
               the way to live
             </p>
-            <Button className="mt-2 md:mt-6">Let`s Shop</Button>
+            <Button className="mt-2 md:mt-6" to="/store">Let`s Shop</Button>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ export default function Landing() {
             </div>
           </div>
           <div className="flex justify-center items-center md:justify-start my-8">
-            <Button>Let’s Explore Top Brands</Button>
+            <Button to="/store">Let’s Explore Top Brands</Button>
           </div>
         </div>
         <div>
