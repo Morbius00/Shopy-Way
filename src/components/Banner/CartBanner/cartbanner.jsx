@@ -17,7 +17,7 @@ export default function cartanner() {
           </div>
           </div>
           
-          <Button className="md:mt-10 mt-5" to="/shop">
+          <Button className="md:mt-10 mt-5" to="/checkout">
             Checkout Now
           </Button>
         </div>

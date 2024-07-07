@@ -9,7 +9,7 @@ export default function homebanner() {
           <div className="lg:text-7xl md:text-5xl text-3xl  font-medium ">Get UpTo <span className="text-white">30%</span> off</div>
           <div className="lg:text-7xl md:text-5xl text-3xl  font-bold my-6">On Big Summer Outfits</div>
           <div className="md:text-5xl text-2xl font-normal ">Starting at @199</div>
-          <Button className="md:mt-10 mt-5" to="/shop">Shop Now</Button>
+          <Button className="md:mt-10 mt-5" to="/store">Shop Now</Button>
         </div>
         <div>
           <div className=" flex items-center justify-center">

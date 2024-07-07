@@ -6,6 +6,8 @@ const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [checkoutItems, setCheckoutItems] = useState([]);
+  const [confirmtItems, setConfirmItems] = useState([]);
+
 
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
@@ -32,9 +34,21 @@ const CartProvider = ({ children }) => {
     setCheckoutItems([...cart]);
   };
 
+  const addToConfirmation = (item) => {
+    setConfirmItems((prevConfirmItems) => {
+      if (!prevConfirmItems.some(product => product.id === item.id)) {
+        return [...prevConfirmItems, item];
+      }
+      return prevConfirmItems;
+    });
+  };
+
+  const confirmAll =() =>{
+    setConfirmItems([...checkoutItems]);
+  }
 
   return (
-    <CartContext.Provider value={{ cart, checkoutItems, addToCart, removeFromCart, addToCheckout, removeFromCheckout, checkoutAll }}>
+    <CartContext.Provider value={{ cart, checkoutItems, confirmtItems, addToCart, removeFromCart, addToCheckout, removeFromCheckout, checkoutAll, addToConfirmation, confirmAll }}>
       {children}
     </CartContext.Provider>
   );

@@ -94,7 +94,7 @@ function CartPage() {
             onClick={handleCheckoutAllClick}
             className="my-5 rounded-xl font-medium text-xl sm:px-[2vw] px-[6vw] py-[1vh] hover:bg-orange-800 bg-orange-500 text-white"
           >
-            Checkout All
+            Buy All
           </Link>
         </div>
         <div>
