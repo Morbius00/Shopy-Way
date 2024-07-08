@@ -1,19 +1,22 @@
 // product-card.jsx
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, useContext } from "react";
 import PropTypes from 'prop-types';
 import { FaShoppingCart, FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import "./productcard.css";
 import SizeCheck from "./sizebox";
-import { useContext } from 'react';
+import Pagination from './Pagination';
 import { CartContext } from '../../services/CartContext';
 
 const api = "https://fakestoreapi.com/products";
 
-function ProductCard({ limit, page }) {
+function ProductCard({ totalProducts }) {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const { addToCart, removeFromCart } = useContext(CartContext);
+  const limit = 12; // Products per page
 
   const handleBuyClick = (id) => {
     setProducts((prevProducts) =>
@@ -35,7 +38,8 @@ function ProductCard({ limit, page }) {
     const fetchProducts = async () => {
       try {
         setLoaded(false); // Set loading state
-        const response = await fetch(`${api}?limit=${limit}&skip=${(page - 1) * limit}`);
+        const skip = limit * (currentPage - 1);
+        const response = await fetch(`${api}?limit=${limit}&skip=${skip}`);
         const data = await response.json();
         setProducts(data.map((product) => ({ ...product, clicked: false })));
         setLoaded(true);
@@ -47,9 +51,10 @@ function ProductCard({ limit, page }) {
     };
 
     fetchProducts();
-  }, [limit, page,]);
+  }, [currentPage, limit]); 
 
-  
+  const totalPages = Math.ceil(totalProducts / limit);
+
   if (error) {
     return (
       <div className="text-center text-2xl font-bold text-[#6A6666]">
@@ -67,7 +72,7 @@ function ProductCard({ limit, page }) {
   }
 
   return (
-    <div className="flex flex-row items-center justify-center ">
+    <div className="flex flex-col items-center justify-center">
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-16 gap-7 mx-1">
         {products.map((product) => (
           <div key={product.id} className="wrapper">
@@ -135,13 +140,17 @@ function ProductCard({ limit, page }) {
           </div>
         ))}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }
 
 ProductCard.propTypes = {
-  limit: PropTypes.number.isRequired,
-  page: PropTypes.number.isRequired,
+  totalProducts: PropTypes.number.isRequired,
 };
 
 export default ProductCard;
