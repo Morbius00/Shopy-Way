@@ -7,12 +7,14 @@ import Store from "./pages/store";
 import Cart from "./pages/cart";
 import Checkout from "./pages/checkout"
 import Successful from "./pages/successful"
+import AboutUs from "./pages/aboutus"
+import NotFound from "./pages/notfound";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -21,6 +23,10 @@ export const routes = createBrowserRouter([
       {
         path: "/store",
         element: <Store />,
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs />,
       },
       {
         path: "/cart",
@@ -34,6 +40,10 @@ export const routes = createBrowserRouter([
         path: "/successful",
         element: <Successful />,
       },
+      {
+        path: "*",
+        element: <NotFound />
+      }
     ],
   },
 ]);

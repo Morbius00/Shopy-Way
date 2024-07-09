@@ -42,7 +42,7 @@ export default function cartproductoffer() {
           />
         </div>
         <div>
-            <Button>Continue Shopping</Button>
+            <Button to="/store">Continue Shopping</Button>
         </div>
       </div>
     </div>

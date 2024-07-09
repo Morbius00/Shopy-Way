@@ -18,7 +18,7 @@ const navigation = [
   { name: "Dashboard", to: "/", current: false },
   { name: "Store", to: "/store", current: false },
   { name: "Category", to: "/category", current: false },
-  { name: "About", to: "/about", current: false },
+  { name: "About", to: "/aboutus", current: false },
   { name: "Contact", to: "/contact", current: false },
 ];
 const cartButtonNavigation = [{ name: "Cart", to: "/cart", current: false }];
