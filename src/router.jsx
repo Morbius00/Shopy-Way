@@ -9,6 +9,7 @@ import Checkout from "./pages/checkout"
 import Successful from "./pages/successful"
 import AboutUs from "./pages/aboutus"
 import NotFound from "./pages/notfound";
+import Contact from "./pages/contact"
 
 export const routes = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const routes = createBrowserRouter([
       {
         path: "/aboutus",
         element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/cart",

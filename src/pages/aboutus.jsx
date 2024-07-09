@@ -1,7 +1,8 @@
 // import React from 'react'
 import AboutBanner from "../components/Banner/AboutBanner/aboutbanner";
-import Hero2 from "../assets/About assets/Hero2.png";
+import { Hero2, Model6 } from "../assets/About assets";
 import Button from "../common/Buttons/button"
+import {  Logo01, Logo02, Logo03, Logo04 } from "../assets/Home assets";
 export default function aboutus() {
   return (
     <div className="">
@@ -37,6 +38,37 @@ export default function aboutus() {
             className="w-96 sm:w-96 lg:pt-5 lg:w-[600px]  shadow-xl shadow-gray-500"
             src={Hero2}
             alt=""
+          />
+        </div>
+      </div>
+      <div className="md:text-4xl text-2xl text-center font-semibold md:mt-32  my-5">
+        Our Partner Brands
+      </div>
+      <div className="flex md:flex-row flex-col items-center justify-center mx-10  my-10">
+        <div className="md:pr-6">
+          <div className="flex flex-wrap md:flex-nowrap gap-5 justify-center md:justify-start mb-5">
+            <img className="" src={Logo01} alt="Brand Logo 1" />
+            <img className="" src={Logo02} alt="Brand Logo 2" />
+            <img className="" src={Logo03} alt="Brand Logo 3" />
+            <img className="" src={Logo04} alt="Brand Logo 4" />
+          </div>
+          <div className="lg:w-[48vw] md:w-[60vw]">
+            <div className="sm:text-xl text-base text-center md:text-start my-5 ">
+              What you wear is how you present yourself to the world, especially
+              today, when human contacts are so quick. Fashion is instant
+              language I firmly believe that with the right footwear one can
+              rule the world.
+            </div>
+          </div>
+          <div className="flex justify-center items-center md:justify-start my-8">
+            <Button to="/store">Let’s Explore Top Brands</Button>
+          </div>
+        </div>
+        <div>
+          <img
+            className="lg:w-[350px] lg:h-[450px] md:w-[468px] md:h-[400px] sm:w-80 sm:h-[458px] w-80 h-96 rounded-2xl"
+            src={Model6}
+            alt="MOdel5"
           />
         </div>
       </div>
