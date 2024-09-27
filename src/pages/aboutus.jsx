@@ -1,11 +1,11 @@
 // import React from 'react'
 import AboutBanner from "../components/Banner/AboutBanner/aboutbanner";
 import { Hero2, Model6 } from "../assets/About assets";
-import Button from "../common/Buttons/button"
-import {  Logo01, Logo02, Logo03, Logo04 } from "../assets/Home assets";
+import Button from "../common/Buttons/button";
+import { Logo01, Logo02, Logo03, Logo04 } from "../assets/Home assets";
 export default function aboutus() {
   return (
-    <div className="">
+    <div>
       <div>
         <AboutBanner />
       </div>
@@ -29,7 +29,7 @@ export default function aboutus() {
             progress, you can trust us when we say that our sustainability goals
             are more ambitious than waking up before the alarm.
           </div>
-          <div className="flex items-center justify-center md:items-start md:justify-start" >
+          <div className="flex items-center justify-center md:items-start md:justify-start">
             <Button>Know More</Button>
           </div>
         </div>
