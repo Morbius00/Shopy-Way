@@ -71,7 +71,11 @@ export default function aboutus() {
             alt="MOdel5"
           />
         </div>
+        
       </div>
+      <div className="flex justify-center my-10">
+          <button className="w-auto h-auto bg-yellow-400 text-black p-5 rounded-md" onClick={() => window.print()}>Print as PDF</button>
+        </div>
     </div>
   );
 }

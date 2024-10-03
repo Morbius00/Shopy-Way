@@ -1,3 +1,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media print {
+    /* Ensure the page content is centered and aligned for print */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Set width of the content for PDF (A4 page size) */
+    .flex {
+      flex-direction: column !important; /* Stack elements vertically */
+      justify-content: flex-start !important;
+    }
+    
+    .text-center, .text-start {
+      text-align: left !important;
+    }
+  
+    /* Set widths for containers */
+    .container {
+      width: 100% !important;
+    }
+  
+    img {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+  
+    /* Hide unnecessary items for printing */
+    button, .print-button, .navbar, footer {
+      display: none !important; /* Hide buttons, navbar, and footer */
+    }
+  
+    /* General adjustments for padding, margins */
+    .my-10, .mx-10 {
+      margin: 0;
+    }
+  
+    .w-96, .w-600px, .w-48vw, .w-auto {
+      width: 100% !important; /* Make all widths 100% for proper fit */
+    }
+  
+    .h-auto, .h-96 {
+      height: auto !important;
+    }
+  
+    /* Typography adjustments */
+    .text-3xl, .text-4xl, .text-2xl, .text-xl {
+      font-size: 18pt !important; /* Adjust large fonts for print */
+    }
+  
+    .lg\:text-xl {
+      font-size: 12pt !important;
+    }
+  
+    /* Additional tweaks for print alignment */
+    .flex-wrap {
+      display: block !important; /* Ensure images don’t wrap horizontally */
+    }
+  }
+  
